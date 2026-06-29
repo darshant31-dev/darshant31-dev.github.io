@@ -881,24 +881,32 @@ body {
     margin-bottom: 0;
 }
 
-.timeline-dot {
+.timeline-dot-linkedin {
     position: absolute;
-    left: 20px;
+    left: 14px;
     top: 5px;
-    width: 24px;
-    height: 24px;
+    width: 36px;
+    height: 36px;
     border-radius: 50%;
     background: var(--bg-darker);
-    border: 4px solid var(--primary-indigo);
+    border: 2px solid var(--primary-indigo);
     box-shadow: 0 0 10px var(--primary-indigo);
-    z-index: 2;
+    z-index: 5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--text-secondary);
+    font-size: 16px;
+    text-decoration: none;
     transition: var(--transition-smooth);
 }
 
-.timeline-item:hover .timeline-dot {
-    border-color: var(--accent-cyan);
-    box-shadow: 0 0 15px var(--accent-cyan);
-    transform: scale(1.2);
+.timeline-dot-linkedin:hover {
+    border-color: #0077b5; /* LinkedIn brand blue */
+    box-shadow: 0 0 18px #0077b5;
+    color: #fff;
+    background: #0077b5;
+    transform: scale(1.25) rotate(360deg);
 }
 
 .timeline-date {
@@ -1458,8 +1466,8 @@ body {
         padding-left: 45px;
     }
     
-    .timeline-dot {
-        left: 6px;
+    .timeline-dot-linkedin {
+        left: -1px;
     }
     
     .form-row {
