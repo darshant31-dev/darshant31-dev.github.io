@@ -350,4 +350,32 @@ document.addEventListener('DOMContentLoaded', () => {
             handleUserQuestion(question);
         });
     });
+
+    // ----------------------------------------------------
+    // Contact Form Mailto Handler
+    // ----------------------------------------------------
+    const contactForm = document.getElementById('contactForm');
+    if (contactForm) {
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('formName').value;
+            const email = document.getElementById('formEmail').value;
+            const subject = document.getElementById('formSubject').value;
+            const message = document.getElementById('formMessage').value;
+
+            // Extract email address dynamically from the form action
+            let emailAddress = 'dtawari31@gmail.com';
+            const action = contactForm.getAttribute('action');
+            if (action && action.startsWith('mailto:')) {
+                emailAddress = action.replace('mailto:', '').split('?')[0];
+            }
+
+            // Formulate mailto link with encoded subject and body fields
+            const bodyText = `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`;
+            const mailtoUrl = `mailto:${emailAddress}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(bodyText)}`;
+            
+            // Redirect to trigger mail client
+            window.location.href = mailtoUrl;
+        });
+    }
 });
