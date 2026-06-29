@@ -23,6 +23,7 @@
                     <li><a href="#home" class="nav-link active">Home</a></li>
                     <li><a href="#about" class="nav-link">About</a></li>
                     <li><a href="#experience" class="nav-link">Experience</a></li>
+                    <li><a href="#playground" class="nav-link">Playground</a></li>
                     <li><a href="#skills" class="nav-link">Skills</a></li>
                     <li><a href="#certifications" class="nav-link">Certifications</a></li>
                     <li><a href="#contact" class="nav-link">Contact</a></li>
@@ -109,7 +110,7 @@
                         Proven expertise in developing high-performance batch and real-time data pipelines, AI-powered data products, and enterprise analytics platforms processing millions of records daily. Hands-on experience with Generative AI, LLM applications, RAG architectures, and intelligent agent development.
                     </p>
                     <p>
-                        Strong background in data governance, data quality, platform automation, and partnering with product, engineering, and business stakeholders to deliver impactful data-driven solutions across multiple industry sectors, including <strong>Insurance, Retail, Sales, and Pharmaceutical</strong>.
+                        Strong background in data governance, data quality, platform automation, and partnering with product, engineering, and business stakeholders to deliver impactful data-driven solutions for 12+ enterprise clients across multiple industry sectors, including <strong>Insurance, Retail, Sales, and Pharmaceutical</strong>.
                     </p>
                 </div>
                 
@@ -120,11 +121,11 @@
                     </div>
                     <div class="stat-card glass-card">
                         <h3>150M+</h3>
-                        <p>Daily Streaming Events</p>
+                        <p>Events/Day (6+ Domains)</p>
                     </div>
                     <div class="stat-card glass-card">
                         <h3>33%</h3>
-                        <p>Cloud Expense Reduction</p>
+                        <p>Cloud Expense Drop ($120K+ ARR)</p>
                     </div>
                     <div class="stat-card glass-card">
                         <h3>10+</h3>
@@ -280,6 +281,201 @@
                             <li>Created a Python framework in Cloud Composer to recursively trigger multiple DAGs from a single main DAG.</li>
                             <li>Collaborated in the Hot-fix team resolving critical client-reported bugs, improving overall pipeline stability.</li>
                         </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Playground Section -->
+    <section id="playground" class="section playground-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-subtitle">Hands-On Demo</span>
+                <h2 class="section-title">System Architect Playground</h2>
+                <div class="underline"></div>
+            </div>
+
+            <div class="playground-layout">
+                <!-- Playground Sidebar / Controls -->
+                <div class="playground-controls glass-card">
+                    <div class="playground-tabs">
+                        <button class="playground-tab-btn active" data-playtab="pipeline">
+                            <i class="fas fa-network-wired"></i> Data Pipeline
+                        </button>
+                        <button class="playground-tab-btn" data-playtab="rag">
+                            <i class="fas fa-brain"></i> GenAI RAG Sandbox
+                        </button>
+                    </div>
+
+                    <!-- Pipeline Tab Controls -->
+                    <div class="playground-tab-content active" id="playtab-pipeline">
+                        <h3>Real-Time Streaming Pipeline</h3>
+                        <p class="playground-desc">Simulate a high-throughput telecom streaming data pipeline processing daily VoLTE element logs.</p>
+                        
+                        <div class="control-group">
+                            <label>Throughput Scale: <span id="pipeline-scale-label">100M</span> Events/Day</label>
+                            <input type="range" id="pipeline-throughput-slider" min="10" max="150" value="100" class="control-slider">
+                        </div>
+
+                        <div class="control-group toggle-group">
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="pipeline-optimize-toggle">
+                                <span class="toggle-slider"></span>
+                            </label>
+                            <span class="toggle-label-text">Enable Schema-On-Read & Caching</span>
+                        </div>
+
+                        <div class="playground-actions">
+                            <button id="btn-inject-anomaly" class="btn btn-warning">
+                                <i class="fas fa-exclamation-triangle"></i> Inject Anomaly
+                            </button>
+                            <button id="btn-reset-pipeline" class="btn btn-outline" style="display:none;">
+                                <i class="fas fa-sync-alt"></i> Reset Flow
+                            </button>
+                        </div>
+
+                        <div class="pipeline-metrics">
+                            <div class="metric-card">
+                                <span class="metric-title">Latency</span>
+                                <span class="metric-value" id="metric-latency">85 ms</span>
+                            </div>
+                            <div class="metric-card">
+                                <span class="metric-title">Packets Drop</span>
+                                <span class="metric-value" id="metric-drops">0.00%</span>
+                            </div>
+                            <div class="metric-card">
+                                <span class="metric-title">Alert Status</span>
+                                <span class="metric-value text-success" id="metric-alerts">OK</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- RAG Tab Controls -->
+                    <div class="playground-tab-content" id="playtab-rag">
+                        <h3>GenAI Resume Q&A Sandbox</h3>
+                        <p class="playground-desc">Simulate how a vector search & LLM Retrieval-Augmented Generation pipeline parses Darshan's resume.</p>
+
+                        <div class="control-group">
+                            <label>LLM Temperature (Creativity): <span id="rag-temp-label">0.2</span></label>
+                            <input type="range" id="rag-temperature-slider" min="0" max="10" value="2" class="control-slider">
+                        </div>
+
+                        <div class="control-group">
+                            <label>Sample Prompts:</label>
+                            <div class="prompt-presets">
+                                <button class="btn-preset-prompt">What did Darshan build at ZS?</button>
+                                <button class="btn-preset-prompt">Does he know AWS & PySpark?</button>
+                                <button class="btn-preset-prompt">Show his cloud certifications.</button>
+                            </div>
+                        </div>
+
+                        <div class="search-box-container">
+                            <input type="text" id="rag-query-input" placeholder="Type or click a preset prompt..." class="rag-search-input">
+                            <button id="btn-run-rag" class="btn btn-primary"><i class="fas fa-play"></i> Run RAG</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Playground Output / Screen -->
+                <div class="playground-viewer glass-card">
+                    <!-- Pipeline Viewer Screen -->
+                    <div class="viewer-screen active" id="view-pipeline">
+                        <div class="pipeline-canvas-container">
+                            <div class="pipeline-node node-source" data-label="Data Source">
+                                <i class="fas fa-mobile-alt font-awesome-icon"></i>
+                                <span class="node-title">Devices</span>
+                                <span class="node-sub">VoLTE Logs</span>
+                            </div>
+
+                            <div class="pipeline-connector">
+                                <div class="packet-flow" id="flow-1"></div>
+                            </div>
+
+                            <div class="pipeline-node node-pubsub" data-label="GCP Pub/Sub">
+                                <i class="fas fa-exchange-alt font-awesome-icon"></i>
+                                <span class="node-title">Pub/Sub</span>
+                                <span class="node-sub">Ingestion</span>
+                            </div>
+
+                            <div class="pipeline-connector">
+                                <div class="packet-flow" id="flow-2"></div>
+                            </div>
+
+                            <div class="pipeline-node node-beam" data-label="Apache Beam">
+                                <i class="fas fa-network-wired font-awesome-icon"></i>
+                                <span class="node-title">Dataflow</span>
+                                <span class="node-sub">Processing</span>
+                            </div>
+
+                            <div class="pipeline-connector">
+                                <div class="packet-flow" id="flow-3"></div>
+                            </div>
+
+                            <div class="pipeline-node node-bq" data-label="Google BigQuery">
+                                <i class="fas fa-database font-awesome-icon"></i>
+                                <span class="node-title">BigQuery</span>
+                                <span class="node-sub">Analytics</span>
+                            </div>
+
+                            <div class="pipeline-connector">
+                                <div class="packet-flow" id="flow-4"></div>
+                            </div>
+
+                            <div class="pipeline-node node-alerts" data-label="Grafana Dashboard">
+                                <i class="fas fa-bell font-awesome-icon"></i>
+                                <span class="node-title">Monitoring</span>
+                                <span class="node-sub">Alerts</span>
+                            </div>
+                        </div>
+
+                        <!-- Pipeline Info Banner -->
+                        <div class="pipeline-info-banner" id="pipeline-status-banner">
+                            <i class="fas fa-info-circle font-awesome-icon"></i> Pipeline active. Drag the throughput slider or toggle schema optimization to inspect live performance parameters.
+                        </div>
+                    </div>
+
+                    <!-- RAG Viewer Screen -->
+                    <div class="viewer-screen" id="view-rag">
+                        <div class="rag-steps-container">
+                            <!-- Step 1: Query Input -->
+                            <div class="rag-step" id="step-query">
+                                <div class="step-num">1</div>
+                                <div class="step-details">
+                                    <h4>Embedding Conversion</h4>
+                                    <div class="step-content text-muted" id="rag-step-1-content">Awaiting search query...</div>
+                                </div>
+                            </div>
+
+                            <!-- Step 2: Vector DB -->
+                            <div class="rag-step" id="step-vector">
+                                <div class="step-num">2</div>
+                                <div class="step-details">
+                                    <h4>Vector DB Similarity Search (Top-K Chunks)</h4>
+                                    <div class="step-content text-muted" id="rag-step-2-content">Awaiting similarity matches...</div>
+                                </div>
+                            </div>
+
+                            <!-- Step 3: Prompt Construction -->
+                            <div class="rag-step" id="step-prompt">
+                                <div class="step-num">3</div>
+                                <div class="step-details">
+                                    <h4>Augmented Prompt Template</h4>
+                                    <div class="step-content text-muted" id="rag-step-3-content">Awaiting context assembly...</div>
+                                </div>
+                            </div>
+
+                            <!-- Step 4: Generation Output -->
+                            <div class="rag-step" id="step-generation">
+                                <div class="step-num">4</div>
+                                <div class="step-details">
+                                    <h4>LLM Text Generation (Response)</h4>
+                                    <div class="step-content-box" id="rag-output-box">
+                                        <div class="empty-state">Output text will print character-by-character here...</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

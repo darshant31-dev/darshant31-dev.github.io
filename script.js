@@ -445,4 +445,283 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     }
+
+    // ----------------------------------------------------
+    // System Architect Playground Logic
+    // ----------------------------------------------------
+    const playTabButtons = document.querySelectorAll('.playground-tab-btn');
+    const playTabContents = document.querySelectorAll('.playground-tab-content');
+    const viewerScreens = document.querySelectorAll('.viewer-screen');
+
+    // Switch between Playground Tabs
+    playTabButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            playTabButtons.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            const tabId = btn.getAttribute('data-playtab');
+
+            // Hide/Show tab inputs
+            playTabContents.forEach(content => {
+                content.classList.remove('active');
+                if (content.getAttribute('id') === `playtab-${tabId}`) {
+                    content.classList.add('active');
+                }
+            });
+
+            // Hide/Show viewer screens
+            viewerScreens.forEach(screen => {
+                screen.classList.remove('active');
+                if (screen.getAttribute('id') === `view-${tabId}`) {
+                    screen.classList.add('active');
+                }
+            });
+        });
+    });
+
+    // 1. Pipeline Simulator Logic
+    const throughputSlider = document.getElementById('pipeline-throughput-slider');
+    const scaleLabel = document.getElementById('pipeline-scale-label');
+    const optimizeToggle = document.getElementById('pipeline-optimize-toggle');
+    const btnInjectAnomaly = document.getElementById('btn-inject-anomaly');
+    const btnResetPipeline = document.getElementById('btn-reset-pipeline');
+
+    const metricLatency = document.getElementById('metric-latency');
+    const metricDrops = document.getElementById('metric-drops');
+    const metricAlerts = document.getElementById('metric-alerts');
+    const statusBanner = document.getElementById('pipeline-status-banner');
+    
+    const packetFlows = document.querySelectorAll('.packet-flow');
+    const alertNode = document.querySelector('.node-alerts');
+
+    function updatePipelineVisuals() {
+        if (!throughputSlider) return;
+        const throughput = parseInt(throughputSlider.value);
+        scaleLabel.textContent = throughput + 'M';
+
+        // Calculate flow animation duration (higher throughput = faster packets)
+        const duration = (200 / throughput) + 's';
+        packetFlows.forEach(flow => {
+            if (!flow.classList.contains('paused')) {
+                flow.style.animationDuration = duration;
+            }
+        });
+
+        // Metrics logic
+        if (metricAlerts.textContent !== 'CRITICAL') {
+            const isOptimized = optimizeToggle.checked;
+            if (isOptimized) {
+                metricLatency.textContent = '12 ms';
+                metricDrops.textContent = '0.00%';
+            } else {
+                // Latency scales slightly down with lower throughput, up with higher
+                const latency = Math.round(50 + (throughput * 0.35));
+                metricLatency.textContent = latency + ' ms';
+                metricDrops.textContent = '0.00%';
+            }
+        }
+    }
+
+    if (throughputSlider) throughputSlider.addEventListener('input', updatePipelineVisuals);
+    if (optimizeToggle) optimizeToggle.addEventListener('change', updatePipelineVisuals);
+
+    // Inject Anomaly
+    if (btnInjectAnomaly) {
+        btnInjectAnomaly.addEventListener('click', () => {
+            // Update metrics
+            metricLatency.textContent = '380 ms';
+            metricDrops.textContent = '14.85%';
+            metricAlerts.textContent = 'CRITICAL';
+            metricAlerts.className = 'metric-value text-danger';
+
+            // Update visual styles
+            packetFlows.forEach(flow => {
+                flow.classList.add('paused', 'red-alert');
+            });
+            alertNode.classList.add('anomaly-active');
+
+            // Update banner
+            statusBanner.className = 'pipeline-info-banner alert-banner';
+            statusBanner.innerHTML = '<i class="fas fa-exclamation-circle font-awesome-icon"></i> ALERT: Call drops spike detected! Dispatched alerts to Kafka topic <code>telecom-anomalies</code> and pushed SMTP email notification to <code>dtwari31@gmail.com</code>.';
+
+            // Toggle action buttons
+            btnInjectAnomaly.style.display = 'none';
+            btnResetPipeline.style.display = 'inline-block';
+        });
+    }
+
+    // Reset Pipeline
+    if (btnResetPipeline) {
+        btnResetPipeline.addEventListener('click', () => {
+            // Reset metrics
+            metricAlerts.textContent = 'OK';
+            metricAlerts.className = 'metric-value text-success';
+
+            // Reset visual styles
+            packetFlows.forEach(flow => {
+                flow.classList.remove('paused', 'red-alert');
+            });
+            alertNode.classList.remove('anomaly-active');
+
+            // Reset banner
+            statusBanner.className = 'pipeline-info-banner';
+            statusBanner.innerHTML = '<i class="fas fa-info-circle font-awesome-icon"></i> Pipeline active. Drag the throughput slider or toggle schema optimization to inspect live performance parameters.';
+
+            // Toggle action buttons
+            btnResetPipeline.style.display = 'none';
+            btnInjectAnomaly.style.display = 'inline-block';
+
+            // Update values
+            updatePipelineVisuals();
+        });
+    }
+
+    // 2. GenAI RAG Sandbox Logic
+    const tempSlider = document.getElementById('rag-temperature-slider');
+    const tempLabel = document.getElementById('rag-temp-label');
+    const queryInput = document.getElementById('rag-query-input');
+    const btnRunRag = document.getElementById('btn-run-rag');
+    const presetButtons = document.querySelectorAll('.btn-preset-prompt');
+
+    const stepQuery = document.getElementById('step-query');
+    const stepVector = document.getElementById('step-vector');
+    const stepPrompt = document.getElementById('step-prompt');
+    const stepGeneration = document.getElementById('step-generation');
+
+    const step1Content = document.getElementById('rag-step-1-content');
+    const step2Content = document.getElementById('rag-step-2-content');
+    const step3Content = document.getElementById('rag-step-3-content');
+    const ragOutputBox = document.getElementById('rag-output-box');
+
+    if (tempSlider) {
+        tempSlider.addEventListener('input', (e) => {
+            tempLabel.textContent = (e.target.value / 10).toFixed(1);
+        });
+    }
+
+    // Presets click
+    presetButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            queryInput.value = btn.textContent;
+            runRagPipeline(btn.textContent);
+        });
+    });
+
+    // Run RAG button click
+    if (btnRunRag) {
+        btnRunRag.addEventListener('click', () => {
+            if (queryInput.value.trim() !== '') {
+                runRagPipeline(queryInput.value);
+            }
+        });
+    }
+
+    // Enter Key
+    if (queryInput) {
+        queryInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter' && queryInput.value.trim() !== '') {
+                runRagPipeline(queryInput.value);
+            }
+        });
+    }
+
+    let typingTimeout = null;
+
+    function runRagPipeline(query) {
+        // Clear previous animations/timeouts
+        if (typingTimeout) clearTimeout(typingTimeout);
+
+        // Reset steps active state
+        document.querySelectorAll('.rag-step').forEach(step => step.classList.remove('active'));
+
+        // Clear contents
+        step1Content.textContent = 'Processing...';
+        step2Content.textContent = 'Searching...';
+        step3Content.textContent = 'Constructing prompt context...';
+        ragOutputBox.innerHTML = '<span class="empty-state">Synthesizing LLM response...</span>';
+
+        // Step 1: Embedding Conversion
+        stepQuery.classList.add('active');
+        const fakeEmbedding = Array.from({length: 8}, () => (Math.random() * 2 - 1).toFixed(3));
+        step1Content.innerHTML = `Query parsed into vector embeddings:<br><code>[${fakeEmbedding.join(', ')}, ...] (1536 dimensions)</code>`;
+
+        // Step 2: Vector Search
+        setTimeout(() => {
+            stepVector.classList.add('active');
+            
+            // Customize retrieved chunks based on prompt
+            let chunk1 = '';
+            let chunk2 = '';
+            const q = query.toLowerCase();
+
+            if (q.includes('zs') || q.includes('priorise') || q.includes('work') || q.includes('experience')) {
+                chunk1 = `<strong>Chunk #1 (Priorise)</strong>: Senior Data Engineer developing Salesforce Agentforce AI Agents to automate message delivery and next best action recommendations. [Score: 98.4%]`;
+                chunk2 = `<strong>Chunk #2 (ZS Associates)</strong>: Designed and deployed a clinical trial Gen-AI platform utilizing Azure OpenAI and vector database embeddings. [Score: 95.1%]`;
+            } else if (q.includes('aws') || q.includes('spark') || q.includes('pyspark') || q.includes('flow') || q.includes('python')) {
+                chunk1 = `<strong>Chunk #1 (Data Ingestion)</strong>: Developed PySpark frameworks for scalable incremental data migration, handling 150M daily events on GCP Beam/Dataflow. [Score: 96.2%]`;
+                chunk2 = `<strong>Chunk #2 (Architecture)</strong>: Deployed data lakes on AWS using Glue, EMR, Athena, and DMS database syncing. [Score: 91.8%]`;
+            } else if (q.includes('cert') || q.includes('cloud') || q.includes('gcp')) {
+                chunk1 = `<strong>Chunk #1 (Certifications)</strong>: Holds GCP Professional Data Engineer and GCP Professional Database Engineer credentials. [Score: 99.1%]`;
+                chunk2 = `<strong>Chunk #2 (AWS Certifications)</strong>: Certified AWS Solutions Architect and Developer. [Score: 94.3%]`;
+            } else {
+                chunk1 = `<strong>Chunk #1 (Background)</strong>: Darshan Tawari is a Senior Data Engineer with 7+ years of expertise in Big Data, RAG systems, and stream pipelines. [Score: 92.5%]`;
+                chunk2 = `<strong>Chunk #2 (Education)</strong>: Graduated from PICT with a First Class Distinction in Information Technology. [Score: 89.2%]`;
+            }
+
+            step2Content.innerHTML = `
+                <div class="highlight-chunk">${chunk1}</div>
+                <div class="highlight-chunk">${chunk2}</div>
+            `;
+        }, 1000);
+
+        // Step 3: Prompt Construction
+        setTimeout(() => {
+            stepPrompt.classList.add('active');
+            step3Content.innerHTML = `
+                Augmented Prompt built with context chunks:<br>
+                <code>System: You are an AI assistant representing Darshan. Answer the query using the context below.<br>Context Chunks: [Retrieved Resume Data]<br>User Query: "${query}"</code>
+            `;
+        }, 2000);
+
+        // Step 4: Text Generation
+        setTimeout(() => {
+            stepGeneration.classList.add('active');
+            ragOutputBox.innerHTML = '';
+            ragOutputBox.classList.add('rag-output-cursor');
+
+            let responseText = '';
+            const q = query.toLowerCase();
+            const temp = parseFloat(tempLabel.textContent);
+
+            if (q.includes('zs') || q.includes('priorise') || q.includes('work') || q.includes('experience')) {
+                responseText = "Darshan Tawari serves as a Senior Data Engineer at Priorise, where he implements Salesforce Agentforce-based bots and Next Best Action prediction engines. Previously, he was a Senior Data Engineer at ZS Associates, designing serverless infrastructures and developing Generative AI platforms that reduced operational expenses by 33%.";
+            } else if (q.includes('aws') || q.includes('spark') || q.includes('pyspark') || q.includes('flow') || q.includes('python')) {
+                responseText = "Darshan is highly proficient in distributed big data pipelines and language APIs. His expertise spans PySpark transformations, GCP Dataflow (Apache Beam) stream processing (handling 100M+ events/day), AWS Glue, EMR analytics, and cloud migration frameworks written in Python.";
+            } else if (q.includes('cert') || q.includes('cloud') || q.includes('gcp')) {
+                responseText = "Darshan is a certified cloud expert with credentials including Google Cloud Certified Professional Data Engineer, Google Cloud Professional Database Engineer, and AWS Certified Developer Associate.";
+            } else {
+                responseText = "Darshan Tawari is an experienced Senior AI Data Engineer specializing in scalable stream architectures, cloud data warehousing (AWS/GCP), and generative AI agent solutioning. Feel free to download his PDF resume on the page for his full credentials.";
+            }
+
+            // Adjust tone based on Temperature (creativity) slider
+            if (temp > 0.7) {
+                responseText += " *[Synthesized with creative temperature settings. Darshan is an absolute data rockstar!]*";
+            } else if (temp < 0.2) {
+                responseText = "[Deterministic Output]: " + responseText;
+            }
+
+            typewriteText(responseText, 0);
+        }, 3000);
+    }
+
+    function typewriteText(text, index) {
+        if (index < text.length) {
+            ragOutputBox.innerHTML += text.charAt(index);
+            typingTimeout = setTimeout(() => {
+                typewriteText(text, index + 1);
+            }, 18);
+        } else {
+            ragOutputBox.classList.remove('rag-output-cursor');
+        }
+    }
 });
