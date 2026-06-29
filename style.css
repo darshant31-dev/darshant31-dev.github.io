@@ -355,6 +355,35 @@ body {
     flex-wrap: wrap;
 }
 
+.hero-socials {
+    display: flex;
+    gap: 16px;
+    margin-top: 25px;
+}
+
+.hero-socials a {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--border-color);
+    color: var(--text-secondary);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    transition: var(--transition-smooth);
+    text-decoration: none;
+}
+
+.hero-socials a:hover {
+    color: #fff;
+    background: rgba(99, 102, 241, 0.1);
+    border-color: var(--primary-indigo);
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(99, 102, 241, 0.3);
+}
+
 /* Profile Photo Container with glowing effects */
 .hero-visual {
     display: flex;
@@ -1358,6 +1387,10 @@ body {
     }
     
     .hero-actions {
+        justify-content: center;
+    }
+    
+    .hero-socials {
         justify-content: center;
     }
     
