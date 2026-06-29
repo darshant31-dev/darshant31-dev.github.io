@@ -914,7 +914,9 @@ body {
 }
 
 .company-badge {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
     padding: 4px 12px;
     background: rgba(139, 92, 246, 0.15);
     border: 1px solid rgba(139, 92, 246, 0.3);
@@ -924,6 +926,19 @@ body {
     font-weight: 600;
     margin-bottom: 12px;
     font-family: 'Space Grotesk', sans-serif;
+}
+
+.company-linkedin {
+    color: #c084fc;
+    font-size: 14px;
+    transition: var(--transition-smooth);
+    display: inline-flex;
+    align-items: center;
+}
+
+.company-linkedin:hover {
+    color: #fff;
+    transform: scale(1.15);
 }
 
 .role-title {
