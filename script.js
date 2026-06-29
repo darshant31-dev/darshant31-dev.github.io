@@ -311,6 +311,30 @@ document.addEventListener('DOMContentLoaded', () => {
         return typingDiv;
     }
 
+    // ----------------------------------------------------
+    // Chatbot Window Toggle Open/Close
+    // ----------------------------------------------------
+    const chatbotWidget = document.getElementById('chatbotWidget');
+    const chatbotTrigger = document.getElementById('chatbotTrigger');
+    const chatCloseBtn = document.getElementById('chatCloseBtn');
+
+    if (chatbotTrigger && chatbotWidget) {
+        chatbotTrigger.addEventListener('click', () => {
+            chatbotWidget.classList.add('active');
+            // Auto scroll messages to bottom and focus input
+            setTimeout(() => {
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+                if (chatInput) chatInput.focus();
+            }, 300);
+        });
+    }
+
+    if (chatCloseBtn && chatbotWidget) {
+        chatCloseBtn.addEventListener('click', () => {
+            chatbotWidget.classList.remove('active');
+        });
+    }
+
     // Attach form submit event
     if (chatForm) {
         chatForm.addEventListener('submit', (e) => {

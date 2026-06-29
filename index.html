@@ -22,7 +22,6 @@
                 <ul class="nav-links">
                     <li><a href="#home" class="nav-link active">Home</a></li>
                     <li><a href="#about" class="nav-link">About</a></li>
-                    <li><a href="#ai-agent" class="nav-link">Ask AI</a></li>
                     <li><a href="#experience" class="nav-link">Experience</a></li>
                     <li><a href="#skills" class="nav-link">Skills</a></li>
                     <li><a href="#certifications" class="nav-link">Certifications</a></li>
@@ -132,48 +131,7 @@
         </div>
     </section>
 
-    <!-- AI Chatbot Simulator Section -->
-    <section id="ai-agent" class="section chatbot-section">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-subtitle">Interactive Query</span>
-                <h2 class="section-title">Ask Darshan's AI Agent</h2>
-                <div class="underline"></div>
-            </div>
-            
-            <p class="section-desc">
-                Want to know more about my experience? Ask my AI agent! It reads my resume details in real time and answers questions.
-            </p>
-            
-            <div class="chatbot-container glass-card">
-                <div class="chatbot-header">
-                    <div class="agent-avatar">
-                        <i class="fas fa-robot"></i>
-                        <span class="status-indicator online"></span>
-                    </div>
-                    <div class="agent-info">
-                        <h3>DT-Agent</h3>
-                        <p>Portfolio Assistant • Online</p>
-                    </div>
-                </div>
-                <div class="chatbot-messages" id="chatMessages">
-                    <div class="message system-message">
-                        <p>Hello! I am Darshan's portfolio AI assistant. Ask me anything about his technical stack, work experience, or background!</p>
-                    </div>
-                </div>
-                <div class="chatbot-suggestions">
-                    <button class="suggest-btn" data-question="Tell me about Darshan's GenAI / LLM projects.">GenAI & LLM Projects</button>
-                    <button class="suggest-btn" data-question="What did he do at Priorise?">Recent Work at Priorise</button>
-                    <button class="suggest-btn" data-question="What cloud platforms does he specialize in?">Cloud Specialization</button>
-                    <button class="suggest-btn" data-question="Tell me about his streaming pipeline experience.">Streaming & Big Data</button>
-                </div>
-                <form class="chatbot-input-area" id="chatForm">
-                    <input type="text" id="chatInput" placeholder="Type your question here (e.g. Do you know PySpark?)..." autocomplete="off">
-                    <button type="submit" class="chat-submit-btn" aria-label="Send Message"><i class="fas fa-paper-plane"></i></button>
-                </form>
-            </div>
-        </div>
-    </section>
+    <!-- Chatbot moved to floating widget -->
 
     <!-- Experience Section -->
     <section id="experience" class="section experience-section">
@@ -519,6 +477,43 @@
             <p class="footer-subtext">Designed & built with <span class="heart">&hearts;</span> by Darshan Tawari.</p>
         </div>
     </footer>
+
+    <!-- Floating Chatbot Widget -->
+    <div class="chatbot-widget" id="chatbotWidget">
+        <button class="chatbot-trigger" id="chatbotTrigger" aria-label="Open Chatbot">
+            <span class="pulse-ring"></span>
+            <i class="fas fa-comments"></i>
+            <span class="trigger-text">Ask Me</span>
+        </button>
+        
+        <div class="chatbot-window glass-card" id="chatbotWindow">
+            <div class="chatbot-window-header">
+                <div class="agent-avatar-mini">
+                    <i class="fas fa-robot"></i>
+                    <span class="status-indicator online"></span>
+                </div>
+                <div class="agent-info-mini">
+                    <h3>DT-Agent</h3>
+                    <p>AI Assistant • Online</p>
+                </div>
+                <button class="chat-close-btn" id="chatCloseBtn" aria-label="Close Chat">&times;</button>
+            </div>
+            <div class="chatbot-messages" id="chatMessages">
+                <div class="message system-message">
+                    <p>Hello! I am Darshan's portfolio AI assistant. Ask me anything about his technical stack, work experience, or background!</p>
+                </div>
+            </div>
+            <div class="chatbot-suggestions">
+                <button class="suggest-btn" data-question="Tell me about Darshan's GenAI / LLM projects.">GenAI & LLM Projects</button>
+                <button class="suggest-btn" data-question="What did he do at Priorise?">Work at Priorise</button>
+                <button class="suggest-btn" data-question="What cloud platforms does he specialize in?">Cloud Stack</button>
+            </div>
+            <form class="chatbot-input-area" id="chatForm">
+                <input type="text" id="chatInput" placeholder="Ask me anything..." autocomplete="off">
+                <button type="submit" class="chat-submit-btn" aria-label="Send Message"><i class="fas fa-paper-plane"></i></button>
+            </form>
+        </div>
+    </div>
 
     <!-- JavaScript code -->
     <script src="script.js"></script>
