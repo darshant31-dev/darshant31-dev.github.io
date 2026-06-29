@@ -983,6 +983,32 @@ body {
     font-size: 11px;
 }
 
+.location-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 12px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--border-color);
+    color: var(--text-secondary);
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 500;
+    font-family: 'Space Grotesk', sans-serif;
+    transition: var(--transition-smooth);
+}
+
+.location-tag i {
+    font-size: 11px;
+    color: var(--primary-indigo);
+}
+
+.location-tag:hover {
+    border-color: var(--primary-indigo);
+    color: var(--text-primary);
+    background: rgba(99, 102, 241, 0.05);
+}
+
 .timeline-date {
     font-family: 'Space Grotesk', sans-serif;
     color: var(--accent-cyan);
