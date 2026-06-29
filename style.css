@@ -1262,6 +1262,39 @@ body {
     justify-content: center;
 }
 
+.btn-submit:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    background: var(--text-muted);
+    box-shadow: none;
+    transform: none !important;
+}
+
+.form-message {
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: 14px;
+    margin-top: 15px;
+    display: none;
+    text-align: center;
+    font-weight: 500;
+    animation: messageFadeIn 0.3s ease;
+}
+
+.form-message.success {
+    display: block;
+    background: rgba(16, 185, 129, 0.15);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    color: #34d399;
+}
+
+.form-message.error {
+    display: block;
+    background: rgba(239, 68, 68, 0.15);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    color: #f87171;
+}
+
 /* Footer Section */
 .footer {
     padding: 40px 0;

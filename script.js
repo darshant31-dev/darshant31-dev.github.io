@@ -352,30 +352,97 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // ----------------------------------------------------
-    // Contact Form Mailto Handler
+    // Contact Form AJAX Handler (FormSubmit.co)
     // ----------------------------------------------------
     const contactForm = document.getElementById('contactForm');
     if (contactForm) {
         contactForm.addEventListener('submit', (e) => {
             e.preventDefault();
+            
+            const submitBtn = contactForm.querySelector('.btn-submit');
+            const originalBtnHtml = submitBtn.innerHTML;
+            
+            // Disable button and show sending state
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = 'Sending... <i class="fas fa-spinner fa-spin"></i>';
+
+            // Find or create response message element
+            let responseMsg = contactForm.querySelector('.form-message');
+            if (!responseMsg) {
+                responseMsg = document.createElement('div');
+                responseMsg.className = 'form-message';
+                contactForm.appendChild(responseMsg);
+            }
+            responseMsg.className = 'form-message'; // Reset classes
+            responseMsg.style.display = 'none';
+
             const name = document.getElementById('formName').value;
             const email = document.getElementById('formEmail').value;
             const subject = document.getElementById('formSubject').value;
             const message = document.getElementById('formMessage').value;
 
-            // Extract email address dynamically from the form action
+            // Extract email address dynamically from form action, fall back to dtawari31@gmail.com
             let emailAddress = 'dtawari31@gmail.com';
             const action = contactForm.getAttribute('action');
-            if (action && action.startsWith('mailto:')) {
-                emailAddress = action.replace('mailto:', '').split('?')[0];
+            if (action) {
+                // If it contains formsubmit.co url, extract email from it
+                if (action.includes('formsubmit.co/')) {
+                    emailAddress = action.split('formsubmit.co/')[1].split('?')[0];
+                } else if (action.startsWith('mailto:')) {
+                    emailAddress = action.replace('mailto:', '').split('?')[0];
+                }
             }
 
-            // Formulate mailto link with encoded subject and body fields
-            const bodyText = `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`;
-            const mailtoUrl = `mailto:${emailAddress}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(bodyText)}`;
-            
-            // Redirect to trigger mail client
-            window.location.href = mailtoUrl;
+            // FormSubmit.co AJAX POST API
+            const postUrl = `https://formsubmit.co/ajax/${emailAddress}`;
+
+            fetch(postUrl, {
+                method: "POST",
+                headers: { 
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify({
+                    name: name,
+                    email: email,
+                    _subject: `Portfolio Contact: ${subject}`,
+                    message: message
+                })
+            })
+            .then(response => {
+                if (response.ok) {
+                    return response.json();
+                }
+                throw new Error('Network response was not ok.');
+            })
+            .then(data => {
+                // Success feedback
+                responseMsg.innerHTML = 'Message sent successfully! Thank you.';
+                responseMsg.classList.add('success');
+                
+                // Reset form inputs
+                contactForm.reset();
+                
+                // Show success status on button
+                submitBtn.innerHTML = 'Message Sent! <i class="fas fa-check"></i>';
+                
+                // Reset states after 5000ms
+                setTimeout(() => {
+                    responseMsg.style.display = 'none';
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = originalBtnHtml;
+                }, 5000);
+            })
+            .catch(error => {
+                // Error feedback
+                console.error('Error submitting form:', error);
+                responseMsg.innerHTML = 'Oops! There was an issue sending your message. Please try again.';
+                responseMsg.classList.add('error');
+                
+                // Restore button
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalBtnHtml;
+            });
         });
     }
 });
