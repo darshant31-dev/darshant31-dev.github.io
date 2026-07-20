@@ -1,84 +1,83 @@
-# 🚀 Darshan Tawari | Senior AI Data Engineer Portfolio
+# 👋 Hi there, I'm Darshan Tawari!
+### Senior AI Data Engineer | GCP & AWS Certified Data Architect
 
-[![Portfolio Live](https://img.shields.io/badge/Live-Portfolio%20Demo-8b5cf6?style=for-the-badge&logo=google-chrome&logoColor=white)](https://darshant31-dev.github.io/)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Profile-0077b5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/dtawari31/)
-[![GitHub](https://img.shields.io/badge/GitHub-Profile-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/darshant31-dev)
-
-Welcome to the repository for my professional portfolio. I am a **Senior AI Data Engineer** with **7+ years of experience** specializing in architecting high-throughput streaming systems, GenAI/RAG platforms, and serverless data lakes.
-
----
-
-## ⚡ Key Professional Stats
-
-*   **7+** Years of Industry Experience
-*   **6+** Business Domains Engineered (Telecom, Pharma, Sales, Insurance, Banking, Retail/Logistics)
-*   **14+** Global Enterprise Clients Served
-*   **10+** GenAI Agents & LLM POCs Deployed
+<p align="center">
+  <a href="https://darshant31-dev.github.io/"><strong>🌐 Visit My Interactive Portfolio</strong></a> | 
+  <a href="https://www.linkedin.com/in/dtawari31/"><strong>💼 Connect on LinkedIn</strong></a> | 
+  <a href="mailto:dtawari31@gmail.com"><strong>✉️ Email Me</strong></a>
+</p>
 
 ---
 
-## 🎨 Creative & Interactive Site Features
+## ⚡ TL;DR — About Me
 
-This portfolio is built to be a living, interactive demonstration of data engineering and artificial intelligence. Highlights include:
+I am a **Senior AI Data Engineer** with **7+ years of experience** building high-performance, distributed data processing systems, serverless cloud platforms, and Generative AI applications. 
 
-### 🖥️ 1. System Architect Playground
-A hands-on, live-running sandbox featuring two tabs:
-*   **Real-Time Data Pipeline Simulator**: Simulates high-throughput streaming (up to **150M+ daily events**). Drag the throughput slider to speed up animations, toggle schema-on-read optimization to watch latency drop from 85ms to 12ms, or click **"Inject Anomaly"** to trigger a mock Kafka alert, Grafana telemetry changes, and a simulated SMTP notification.
-*   **GenAI Resume RAG Sandbox**: Step-by-step visual representation of a Retrieval-Augmented Generation pipeline. Type questions or select presets (like *"Does Darshan know PySpark?"*) to see:
-    1.  Embedding conversion ($1536$-dimensions)
-    2.  Vector Database matches with PgVector similarity scores
-    3.  Augmented prompt synthesis
-    4.  LLM character-by-character typing output controlled by a temperature creativity slider
-
-### 💬 2. "Ask Me" Resume Chatbot
-A custom floating widget chatbot embedded right on the page. Ask details about specific career roles, certifications, education, or contact details, and receive prompt, detailed knowledge-base replies in real-time.
-
-### ✉️ 3. Frictionless AJAX Contact Form
-Fully asynchronous contact form utilizing the FormSubmit API. Delivers clean messages directly to my inbox without opening default desktop mail clients, complete with visual loading loops and inline glassmorphic success modals.
+*   🔭 **Current Focus**: Engineering AI-driven **Next Best Action** recommendation engines and **Salesforce Agentforce** conversational agents at **Priorise**.
+*   ⚙️ **Distributed Compute**: Architected stream processing pipelines processing **150M+ daily events** using GCP Dataflow (Apache Beam) and PySpark.
+*   🧠 **Generative AI & LLMs**: Developed clinical chat systems, search index configurations, vector space chunking strategies, and RAG architectures (Azure OpenAI / LangChain).
+*   ☁️ **Certified Cloud Architect**: Google Cloud Certified Professional Data Engineer & Database Engineer, and AWS Certified Developer.
 
 ---
 
-## 🛠️ The Tech Stack
+## 📊 Key Highlights & Metrics
 
-<table>
-  <tr>
-    <td><strong>Big Data & Stream</strong></td>
-    <td>PySpark, Apache Beam (GCP Dataflow), Apache Kafka, GCP Pub/Sub, Cloud Composer (Airflow)</td>
-  </tr>
-  <tr>
-    <td><strong>GenAI & LLMs</strong></td>
-    <td>OpenAI API, LangChain, Salesforce Agentforce, Vector Databases (Pinecone/PgVector), Prompt Optimization</td>
-  </tr>
-  <tr>
-    <td><strong>Cloud Platforms</strong></td>
-    <td>AWS (Solutions Architect & Developer Associate), GCP (Professional Data & Database Engineer)</td>
-  </tr>
-  <tr>
-    <td><strong>Data Stores</strong></td>
-    <td>Google BigQuery, AWS Redshift, Snowflake, Apache Iceberg, Delta Lake, DynamoDB, AlloyDB</td>
-  </tr>
-</table>
-
----
-
-## 📂 Repository Layout
-
-```bash
-├── preview/                      # Sandbox preview folder environment
-│   ├── index.html
-│   ├── style.css
-│   └── script.js
-├── Darshan_Senior_Data_Engineer_Resume.pdf  # Downloadable PDF Resume
-├── index.html                    # Main landing page markup
-├── style.css                     # Custom glassmorphic styling sheet
-├── script.js                     # Core dynamic animations & simulation scripts
-└── README.md                     # This documentation file
+```text
+┌───────────────────────────────┬───────────────────────────────┐
+│       7+ Years Experience     │    6+ Industry Domains        │
+├───────────────────────────────┼───────────────────────────────┤
+│    14+ Enterprise Clients     │    10+ AI Agents & LLM POCs   │
+└───────────────────────────────┴───────────────────────────────┘
 ```
+*   **$120K+ ARR Savings**: Reduced infrastructure compute overhead by **33%** through Spot Instance lifecycle tiering, PySpark optimizations, and EMR auto-scaling.
+*   **150M+ Ingestion Scale**: Built Telecom VoLTE network performance dashboards monitoring latency spikes.
 
 ---
 
-## 🚀 Deployed Link
+## 🛠️ The Tech Toolbox
 
-The site is built with modern vanilla HTML/CSS/JS and is hosted using GitHub Pages. Access the live URL:
+### 💻 Languages & Distributed Systems
+<p align="left">
+  <img src="https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white" alt="Python" />
+  <img src="https://img.shields.io/badge/SQL-4479A1?style=flat-square&logo=postgresql&logoColor=white" alt="SQL" />
+  <img src="https://img.shields.io/badge/Scala-DE3423?style=flat-square&logo=scala&logoColor=white" alt="Scala" />
+  <img src="https://img.shields.io/badge/Apache_Spark-E25A1C?style=flat-square&logo=apachespark&logoColor=white" alt="Spark" />
+  <img src="https://img.shields.io/badge/Apache_Beam-F15A24?style=flat-square&logo=apache&logoColor=white" alt="Beam" />
+  <img src="https://img.shields.io/badge/Apache_Kafka-231F20?style=flat-square&logo=apachekafka&logoColor=white" alt="Kafka" />
+  <img src="https://img.shields.io/badge/Apache_Airflow-017CEE?style=flat-square&logo=apacheairflow&logoColor=white" alt="Airflow" />
+</p>
 
-👉 **[https://darshant31-dev.github.io/](https://darshant31-dev.github.io/)**
+### ☁️ Cloud & Analytics Warehouses
+<p align="left">
+  <img src="https://img.shields.io/badge/AWS-232F3E?style=flat-square&logo=amazon-aws&logoColor=white" alt="AWS" />
+  <img src="https://img.shields.io/badge/Google_Cloud-4285F4?style=flat-square&logo=google-cloud&logoColor=white" alt="GCP" />
+  <img src="https://img.shields.io/badge/Google_BigQuery-669DF2?style=flat-square&logo=google&logoColor=white" alt="BigQuery" />
+  <img src="https://img.shields.io/badge/Snowflake-29B5E8?style=flat-square&logo=snowflake&logoColor=white" alt="Snowflake" />
+  <img src="https://img.shields.io/badge/Databricks-FF3621?style=flat-square&logo=databricks&logoColor=white" alt="Databricks" />
+</p>
+
+### 🤖 Generative AI & Agents
+<p align="left">
+  <img src="https://img.shields.io/badge/OpenAI_API-412991?style=flat-square&logo=openai&logoColor=white" alt="OpenAI" />
+  <img src="https://img.shields.io/badge/LangChain-1C3C3C?style=flat-square&logo=chainlink&logoColor=white" alt="LangChain" />
+  <img src="https://img.shields.io/badge/Agentforce-00A1E0?style=flat-square&logo=salesforce&logoColor=white" alt="Agentforce" />
+  <img src="https://img.shields.io/badge/Vector_DBs-PgVector%20%2F%20Pinecone-8b5cf6?style=flat-square" alt="Vectors" />
+</p>
+
+---
+
+## 🎮 Play with my Systems
+
+Visit my [interactive portfolio](https://darshant31-dev.github.io/) to experiment with:
+*   **Real-Time Data Pipeline Simulator**: Speed up packet throughput, toggle optimizations to drop latency to $12\text{ms}$, or inject anomalies to see automated Kafka routing and alerts.
+*   **GenAI Resume RAG Sandbox**: Inspect how search prompts get parsed, similarity matched using vector embeddings, augmented into templates, and typed out dynamically.
+*   **Ask Me AI Assistant**: Trigger the conversational chatbot widget built directly onto the interface.
+
+---
+
+## 📈 GitHub Metrics
+
+<p align="center">
+  <img src="https://github-readme-stats.vercel.app/api?username=darshant31-dev&show_icons=true&theme=tokyonight&hide_border=true" alt="GitHub Stats" width="48%" />
+  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=darshant31-dev&layout=compact&theme=tokyonight&hide_border=true" alt="Top Languages" width="48%" />
+</p>
